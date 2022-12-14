@@ -1,0 +1,21 @@
+{
+    "resourceId": "60001",
+    "organization": "default",
+    "email": "joseantonio@sunrise.demo",
+    "phone": "34000000000",
+    "resourceInternalId": 6000001,
+    "status": "active",
+    "parentResourceId": "CAUSA",
+    "resourceType": "PR",
+    "name": "JOSE ANTONIO",
+    "language": "en",
+    "languageISO": "en-US",
+    "timeZoneDiff": -240,
+    "timeZone": "Pacific",
+    "timeZoneIANA": "America/Los_Angeles",
+    "dateFormat": "mm/dd/yy",
+    "timeFormat": "24-hour",
+    "durationStatisticsInitialRatio": 1,
+    "Resource type": "2",
+    "gender": "2"
+}

@@ -1,0 +1,82 @@
+{
+    "fieldValidators": [
+      ],
+    "objectFunctions": [
+        {
+            "active": "active",
+            "functionName": "test",
+            "lastUpdate": "2022-11-04T06:05:40",
+            "oid": "32605a5c-5730-40d6-a4f5-aa18aec35b19",
+            "returnType": "String",
+            "scriptMimeType": "application/x-adf-groovy",
+            "visibility": [
+                "external"
+            ],
+            "functionBody": "for(int i = 0;i<5000000000;i++) {\n         println(i);\n      }",
+            "privileged": false
+        }
+      ],
+    "objectValidators": [],
+    "triggers": [
+      ],
+    "fieldTriggers": [
+        {
+            "active": "active",
+            "displayName": "StatusChange",
+            "lastUpdate": "2022-12-14T09:08:33",
+            "oid": "db2640fd-8e5e-4b7b-a2fe-fbb7e3bf033d",
+            "onField": "status",
+            "scriptMimeType": "application/x-adf-groovy",
+            "workflow": {
+                "nodeType": "criterion",
+                "type": "condition",
+                "displayName": "Execute Conditionally",
+                "outcomes": {
+                    "false": {
+                        "for": "trigger",
+                        "nodeType": "terminus",
+                        "type": "end"
+
+                    },
+                    "true": {
+                        "nodeType": "actionGroup",
+                        "displayName": "Action Group",
+                        "after": {
+                            "nodeType": "terminus",
+                            "type": "continue",
+                            "for": "criteria"
+                        },
+                        "methodDefinition": {
+                            "typeId": "customGroovy",
+                            "vars": {
+                                "code": "import oracle.adf.model.connection.rest.exception.RestConnectionException\nimport oracle.jbo.ValidationException\n\ntry{\n  //Request to inactive the resource in field service\ndef restOfscCoreV1 = newService('restOfscCoreV1');\nrestOfscCoreV1.pathParams['resourceId'] = id; \ndef createRequest = '{\"status\":\"inactive\"}'\ndef restOfscCoreV1PutResourcesId = restOfscCoreV1.updateResourceId(createRequest);\nremoteUserId = restOfscCoreV1PutResourcesId.email\nprintln(\"FS API response ${restOfscCoreV1PutResourcesId.email}\")\n}\ncatch (RestConnectionException rcex) {\n  throw new ValidationException(\"Issue with FS API, try again later ${rcex}\")\n} ",
+                                "rawDescription": "Inactive resource in field service",
+                                "description": "Inactive resource in field service",
+                                "methodName": "onUsersActionGroupExecute",
+                                "pageEvent": "actionGroupExecute"
+                            },
+                            "outcomeHandlers": {
+                            }
+                        }
+                    }
+                },
+                "condition": {
+                    "children": [
+                        {
+                            "tooltip": "",
+                            "criteriaLhs": "status",
+                            "criteriaCond": "string:equals",
+                            "criteriaRhsInputMode": "static",
+                            "criteriaRhsInput": "inactive",
+                            "criteriaRhs": "'inactive'"
+                        }
+                    ],
+                    "tooltip": "",
+                    "className": "criteria-group-row-outermost",
+                    "matchChoice": "all"
+                }
+            },
+            "description": "Field trigger to invoke FS resource api upon resource inactivation"
+        }
+      ]
+}

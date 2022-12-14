@@ -1,0 +1,29 @@
+{
+    "roleMapping": {
+        "idcsHostUrl": "https://idcs-4057aad09e844f4e861ac2469410e47b.identity.oraclecloud.com:443",
+        "roles": {
+            "Contractors": {
+                "base_configuration": {
+                    "users": [ ],
+                    "groups": [
+                        {
+                            "id": "290bccf8532c46ef9897c879bb48ec94",
+                            "displayName": "contractors"
+                        }
+                    ]
+                }
+            },
+            "Administrators": {
+                "base_configuration": {
+                    "users": [ ],
+                    "groups": [
+                        {
+                            "id": "46df24762cc5418ab371d762dc9ee6c4",
+                            "displayName": "Admins"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

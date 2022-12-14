@@ -1,0 +1,27 @@
+{
+  "component-dependencies": {
+    "oj-sample": {
+      "version": "6.0.0",
+      "components": {
+        "utils": "5.0.0",
+        "export-data": "6.0.1"
+      }
+    },
+    "oj-sp": {
+      "version": "2207.0.0",
+      "components": {
+        "pillar-theme": "2207.0.0",
+        "common-util": "2207.0.0",
+        "thumbnail": "2207.0.0",
+        "card-footer": "2207.0.0",
+        "common-strings": "2207.0.0",
+        "common": "2207.0.0",
+        "mini-card": "2207.0.0",
+        "object-card": "2207.0.0",
+        "image-card": "2207.0.0",
+        "css-additions": "2207.0.0"
+
+      }
+    }
+  }
+}

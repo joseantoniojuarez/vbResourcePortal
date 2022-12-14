@@ -1,0 +1,23 @@
+{
+    "backends": {
+        "vbprocess": {
+            "serviceType": "vbprocess",
+            "servers": [
+                {
+                    "url": "vb-catalog://backends.tenant/vbprocess",
+                    "description": "Player Target Server",
+                    "x-vb": {
+                        "headers": {
+                            "pcs_mode": "dev"
+                        }
+                    }
+                },
+                {
+                    "url": "vb-catalog://backends.tenant/vbprocess",
+                    "description": "Default Target Server",
+                    "x-vb": {}
+                }
+            ]
+        }
+      }
+}

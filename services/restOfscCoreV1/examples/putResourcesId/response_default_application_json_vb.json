@@ -1,0 +1,73 @@
+{
+    "resourceId": "jajuser",
+    "organization": "default",
+    "email": "joseantonio@sunrise.demo",
+    "phone": "34000000000",
+    "resourceInternalId": 8100470,
+    "parentResourceInternalId": 8100368,
+    "status": "active",
+    "parentResourceId": "CAUSA",
+    "resourceType": "PR",
+    "name": "JOSE ANTONIO",
+    "language": "en",
+    "languageISO": "en-US",
+    "timeZoneDiff": -240,
+    "timeZone": "Pacific",
+    "timeZoneIANA": "America/Los_Angeles",
+    "dateFormat": "mm/dd/yy",
+    "timeFormat": "24-hour",
+    "durationStatisticsInitialRatio": 1,
+    "durationStatisticsInitialPeriod": 5,
+    "Resource type": "2",
+    "gender": "2",
+    "inventories": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser/inventories"
+            }
+        ]
+    },
+    "users": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser/users"
+            }
+        ]
+    },
+    "workZones": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser/workZones"
+            }
+        ]
+    },
+    "workSkills": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser/workSkills"
+            }
+        ]
+    },
+    "workSchedules": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser/workSchedules"
+            }
+        ]
+    },
+    "links": [
+        {
+            "rel": "canonical",
+            "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/jajuser"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/metadata-catalog/resources"
+        }
+    ]
+}

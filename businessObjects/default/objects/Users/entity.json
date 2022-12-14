@@ -1,0 +1,298 @@
+{
+    "fields": [
+        {
+            "type": "number",
+            "name": "id",
+            "internal": true,
+            "key": true,
+            "oid": "2de57f34-5f61-4224-bea7-dbefa6bc9598",
+            "required": true,
+            "unique": true,
+            "displayLabel": "Id"
+        },
+        {
+            "type": "datetime",
+            "name": "creationDate",
+            "internal": true,
+            "oid": "1e9596f8-ac40-4d36-b240-5bb7b73fe15a",
+            "displayLabel": "Created"
+        },
+        {
+            "type": "datetime",
+            "name": "lastUpdateDate",
+            "internal": true,
+            "oid": "c2c07e8c-2dfc-4bc1-8a0d-55c84115dba8",
+            "displayLabel": "Last Updated"
+        },
+        {
+            "type": "string",
+            "name": "createdBy",
+            "internal": true,
+            "oid": "0034bc60-0fe5-484f-adcd-5ed884d4e9d5",
+            "displayLabel": "Created By"
+        },
+        {
+            "type": "string",
+            "name": "lastUpdatedBy",
+            "internal": true,
+            "oid": "d3780864-f4c4-4fcb-b225-7156425a9ebc",
+            "displayLabel": "Last Updated By"
+        },
+{
+            "type": "number",
+            "hidden": true,
+            "name": "abcsChangeNumber",
+            "internal": true,
+            "oid": "488047ce-6d39-40c5-919c-240306ae61c5",
+            "displayLabel": "<internal>"
+        },
+        {
+            "type": "string",
+            "name": "Name",
+            "oid": "771161f3-5a7b-4f47-b134-a9cde4477f78",
+            "displayLabel": "Name"
+        }        ,
+        {
+            "type": "string",
+            "name": "Crew",
+            "oid": "21d4a546-7cf7-4cc4-b51a-74d9561ea036",
+            "displayLabel": "Crew"
+        }        ,
+        {
+            "type": "string",
+            "name": "status",
+            "oid": "d2371bcd-f280-46c2-9713-dbc35295e0a8",
+            "displayLabel": "Status"
+        }        ,
+        {
+            "type": "string",
+            "name": "notes",
+            "oid": "a8ae3138-c40d-43e0-81d1-df78f0efb860",
+            "displayLabel": "Notes"
+        }        ,
+{
+            "type": "string",
+            "name": "Email",
+            "oid": "7b6b4bc2-d22f-42ad-a0df-bb9fb0e8406a",
+            "displayLabel": "Email",
+            "required": true,
+            "unique": true,
+            "pattern": ""
+        },
+        {
+            "type": "string",
+            "name": "State",
+            "oid": "f07d25bc-a703-43c4-90b4-b010624ab4e5",
+            "displayLabel": "State"
+        }        ,
+        {
+            "type": "string",
+            "name": "Role1",
+            "oid": "400d4216-1037-4c6d-b4bf-3ec187f3226f",
+            "displayLabel": "Role"
+        }        ,
+        {
+            "type": "boolean",
+            "name": "LodgingRequired",
+            "oid": "83a83c91-71c8-46c0-931d-19fb3b0ca526",
+            "displayLabel": "Lodging Required"
+        }        ,
+        {
+            "type": "string",
+            "name": "TypeofLodging",
+            "oid": "425b36af-7176-4b92-b1b1-4ae4ea602803",
+            "displayLabel": "Type of Lodging"
+        }        ,
+        {
+            "type": "string",
+            "name": "Division",
+            "oid": "3a69dd13-0b07-433a-a9ee-cd5ce927f093",
+            "displayLabel": "Division"
+        }        ,
+        {
+            "type": "number",
+            "name": "Phone1",
+            "oid": "5c5b9f8a-9f0e-415f-898b-93504f0159a8",
+            "displayLabel": "Phone1"
+        }        ,
+        {
+            "type": "string",
+            "name": "Phone",
+            "oid": "133c1d86-3e31-4a72-8a62-04b14321ad61",
+            "displayLabel": "Phone"
+        },
+{
+            "type": "string",
+            "name": "APIResponse",
+            "oid": "e305cee6-97bb-4143-8250-9cc4376f681c",
+            "displayLabel": "APIResponse"
+        },
+        {
+            "type": "string",
+            "name": "contractorName",
+            "oid": "0fbe20f4-1456-46f9-b9bd-68b10b13dfce",
+            "displayLabel": "contractorName"
+        },
+{
+            "type": "string",
+            "name": "contractorUserId",
+            "oid": "1dcbf107-a8b0-4822-b644-925e330fc5e6",
+            "displayLabel": "contractorUserId"
+        },
+        {
+            "type": "string",
+            "name": "Event",
+            "oid": "849b52f1-d80c-4519-8047-03281ab20e3c",
+            "displayLabel": "Event"
+        }
+    ],
+    "name": "Users",
+    "oid": "b092e157-7502-40c5-a0c5-d002ce5a4fa0",
+    "displayLabel": "Users",
+    "relationships": [
+        {
+            "name": "dataLoadIndexCollection",
+            "reverseRelationship": "usersObject",
+            "targetEntity": "DataLoadIndex",
+            "type": "incoming",
+            "exposeAccessor": true,
+            "displayField": "Name"
+        }
+    ],
+    "objectFunctions": [
+        {
+            "definition": "for(int i = 0;i<5000000000;i++) {\n         println(i);\n      }\n",
+            "name": "test",
+            "refId": "32605a5c-5730-40d6-a4f5-aa18aec35b19",
+            "returnType": "String",
+            "visibility": [
+                "external"
+            ],
+            "privilege": false
+        }
+    ],
+    "triggers": [
+{
+            "definition": "// Field Trigger Beginning \nprintln 'Field Trigger started: statusApproved, business object: Users, field: status';\n\ntry {\n\n  // No Fragment Generator found\n} finally {\n\n  // Field Trigger End \n  println 'Field Trigger ended: statusApproved';\n\n}",
+            "displayName": "statusApproved",
+            "name": "status_Field_Rule_0",
+            "refId": "f6a0ffb1-2ad4-413f-b2f9-8c57d439df82",
+            "type": "Modify",
+            "onProperty": "status"
+        },
+        {
+            "definition": "// Field Trigger Beginning \nprintln 'Field Trigger started: StatusChange, business object: Users, field: status';\n\ntry {\n\n  // Execute Conditionally Criterion (Execute Conditionally)\n  def codeCriterion_1 = (status == 'inactive');\n  println \"Trigger condition (status == 'inactive') is \" + codeCriterion_1;\n  if (codeCriterion_1) {\n    // Action Group (Action Group)\n    import oracle.adf.model.connection.rest.exception.RestConnectionException\n    import oracle.jbo.ValidationException\n\n    try{\n      //Request to inactive the resource in field service\n    def restOfscCoreV1 = newService('restOfscCoreV1');\n    restOfscCoreV1.pathParams['resourceId'] = id; \n    def createRequest = '{\"status\":\"inactive\"}'\n    def restOfscCoreV1PutResourcesId = restOfscCoreV1.updateResourceId(createRequest);\n    remoteUserId = restOfscCoreV1PutResourcesId.email\n    println(\"FS API response ${restOfscCoreV1PutResourcesId.email}\")\n    }\n    catch (RestConnectionException rcex) {\n      throw new ValidationException(\"Issue with FS API, try again later ${rcex}\")\n    } \n\n  }\n\n} finally {\n\n  // Field Trigger End \n  println 'Field Trigger ended: StatusChange';\n\n}",
+            "displayName": "StatusChange",
+            "name": "status_Field_Rule_1",
+            "refId": "db2640fd-8e5e-4b7b-a2fe-fbb7e3bf033d",
+            "type": "Modify",
+            "onProperty": "status"
+        }
+    ],
+    "validators": [
+    ],
+    "security": {
+        "type": "local",
+        "acl": [
+            {
+                "roleId": "Administrators",
+                "privileges": [
+                    {
+                        "name": "view",
+                        "value": true
+                    },
+                    {
+                        "name": "create",
+                        "value": true
+                    },
+                    {
+                        "name": "update",
+                        "value": true
+                    },
+                    {
+                        "name": "delete",
+                        "value": true
+                    }
+                ]
+            },
+            {
+                "roleId": "Contractors",
+                "privileges": [
+                    {
+                        "name": "view",
+                        "value": true,
+                        "condition": {
+                            "fieldId": "createdBy",
+                            "operator": "Equals",
+                            "value": "=adf.context.getSecurityContext()?.getUserName()"
+                        }
+                    },
+                    {
+                        "name": "create",
+                        "value": true
+                    },
+                    {
+                        "name": "update",
+                        "value": true,
+                        "condition": {
+                            "fieldId": "createdBy",
+                            "operator": "Equals",
+                            "value": "=adf.context.getSecurityContext()?.getUserName()"
+                        }
+                    },
+                    {
+                        "name": "delete",
+                        "value": true,
+                        "condition": {
+                            "fieldId": "createdBy",
+                            "operator": "Equals",
+                            "value": "=adf.context.getSecurityContext()?.getUserName()"
+                        }
+                    }
+                ]
+            },
+            {
+                "roleId": "approle.anonymous.user",
+                "privileges": [
+                    {
+                        "name": "view",
+                        "value": false
+                    },
+                    {
+                        "name": "create",
+                        "value": false
+                    },
+                    {
+                        "name": "update",
+                        "value": false
+                    },
+                    {
+                        "name": "delete",
+                        "value": false
+                    }
+                ]
+            },
+            {
+                "roleId": "approle.authenticated.user",
+                "privileges": [
+                    {
+                        "name": "view",
+                        "value": false
+                    },
+                    {
+                        "name": "create",
+                        "value": false
+                    },
+                    {
+                        "name": "update",
+                        "value": false
+                    },
+                    {
+                        "name": "delete",
+                        "value": false
+                    }
+                ]
+            }
+        ]
+    }
+}

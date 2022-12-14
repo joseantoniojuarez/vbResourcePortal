@@ -1,0 +1,162 @@
+{
+    "fields": [
+        {
+            "type": "number",
+            "name": "id",
+            "internal": true,
+            "key": true,
+            "oid": "77cc5e37-4047-4d5d-9097-a7e27e5dd500",
+            "required": true,
+            "unique": true,
+            "displayLabel": "Id"
+        },
+        {
+            "type": "datetime",
+            "name": "creationDate",
+            "internal": true,
+            "oid": "b27ec5bb-4cdc-499d-a28e-fd170f63590d",
+            "displayLabel": "Created"
+        },
+        {
+            "type": "datetime",
+            "name": "lastUpdateDate",
+            "internal": true,
+            "oid": "d7888976-3033-45e3-90d7-983d9552e895",
+            "displayLabel": "Last Updated"
+        },
+        {
+            "type": "string",
+            "name": "createdBy",
+            "internal": true,
+            "oid": "8b9243ee-7c68-4745-94dc-3fa1601420d4",
+            "displayLabel": "Created By"
+        },
+        {
+            "type": "string",
+            "name": "lastUpdatedBy",
+            "internal": true,
+            "oid": "a522b527-8f28-46b4-9d0a-dfdc404700c8",
+            "displayLabel": "Last Updated By"
+        },
+{
+            "type": "number",
+            "hidden": true,
+            "name": "abcsChangeNumber",
+            "internal": true,
+            "oid": "927701dd-f96c-4469-bbea-12e9b0a64dd8",
+            "displayLabel": "<internal>"
+        },
+        {
+            "type": "reference",
+            "name": "dataLoadId",
+            "oid": "0f988c39-5d56-4b69-a4e8-86029255a1a2",
+            "displayLabel": "dataLoadId"
+        }        ,
+        {
+            "type": "string",
+            "name": "name",
+            "oid": "0027a35f-4fdb-43d5-a623-4459cce6f1ea",
+            "displayLabel": "Name"
+        }        ,
+        {
+            "type": "number",
+            "name": "phone",
+            "oid": "5316d931-6862-4980-8773-73727d8be44c",
+            "displayLabel": "Phone"
+        }        ,
+        {
+            "type": "string",
+            "name": "email",
+            "oid": "6d098fef-3cff-4cc6-8899-06adf4827411",
+            "displayLabel": "Email",
+            "format": "email"
+        }        ,
+        {
+            "type": "string",
+            "name": "contractor",
+            "oid": "8d76b2d9-efb3-4863-99d4-5d962abf2060",
+            "displayLabel": "Contractor"
+        }        ,
+        {
+            "type": "string",
+            "name": "crew",
+            "oid": "908a17ca-6875-4204-ac4a-6ab8d101c854",
+            "displayLabel": "Crew"
+        }        ,
+        {
+            "type": "string",
+            "name": "state",
+            "oid": "4ed123e3-8cd4-4c6e-9c47-62238a152f88",
+            "displayLabel": "State"
+        }        ,
+        {
+            "type": "string",
+            "name": "role1",
+            "oid": "7b4eb1b8-ac04-4797-be77-4fb055efdc8c",
+            "displayLabel": "Role"
+        }        ,
+        {
+            "type": "string",
+            "name": "lodgingRequired",
+            "oid": "44060bd6-5865-42f3-bfe1-f2e500247b16",
+            "displayLabel": "LodgingRequired"
+        }        ,
+        {
+            "type": "string",
+            "name": "typeOfLodging",
+            "oid": "44618bf0-3574-4799-90c5-8681ea17faed",
+            "displayLabel": "TypeOfLodging"
+        }        ,
+        {
+            "type": "string",
+            "name": "divsion",
+            "oid": "9eaa7606-33ab-4203-a779-10f1e0e10f02",
+            "displayLabel": "Divsion"
+        }        ,
+        {
+            "type": "boolean",
+            "name": "excludeFromImport",
+            "oid": "bd958ddf-73b2-4acc-9850-ba5fc54fd970",
+            "displayLabel": "ExcludeFromImport"
+        }        ,
+        {
+            "type": "string",
+            "name": "importResult",
+            "oid": "c46e44db-4c15-4b46-adb7-876b1deb79a3",
+            "displayLabel": "ImportResult"
+        }        ,
+        {
+            "type": "datetime",
+            "name": "importDate",
+            "oid": "24acb677-4cea-425d-bc1c-7a187d40d87a",
+            "displayLabel": "ImportDate"
+        }        ,
+        {
+            "type": "string",
+            "name": "notes",
+            "oid": "ecea6183-6444-4abc-b78c-7a639b6a5991",
+            "displayLabel": "Notes"
+        }
+    ],
+    "name": "DataLoadDetail",
+    "oid": "47eccf0d-14fc-4fc9-8974-d1c1849b8fca",
+    "displayLabel": "DataLoadDetail",
+    "relationships": [
+        {
+            "name": "dataLoadIdObject",
+            "reverseRelationship": "dataLoadDetailCollection",
+            "targetEntity": "DataLoadIndex",
+            "type": "outgoing",
+            "exposeAccessor": true,
+            "mappingField": "dataLoadId",
+            "deleteRule": "restrict"
+        },
+        {
+            "name": "auditCollection",
+            "reverseRelationship": "recordIdObject",
+            "targetEntity": "Audit1",
+            "type": "incoming",
+            "displayField": "id"
+        }
+    ]
+}

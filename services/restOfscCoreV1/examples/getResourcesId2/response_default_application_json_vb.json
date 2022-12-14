@@ -1,0 +1,70 @@
+{
+    "resourceId": "32",
+    "organization": "default",
+    "email": "class com.oracle.breeze.ramp.helpers.Email",
+    "resourceInternalId": 8100472,
+    "parentResourceInternalId": 8100368,
+    "status": "active",
+    "parentResourceId": "CAUSA",
+    "resourceType": "PR",
+    "name": "Mater Technologies - Sentinel Servers",
+    "language": "en",
+    "languageISO": "en-US",
+    "timeZoneDiff": -240,
+    "timeZone": "Pacific",
+    "timeZoneIANA": "America/Los_Angeles",
+    "dateFormat": "mm/dd/yy",
+    "timeFormat": "12-hour",
+    "durationStatisticsInitialRatio": 1,
+    "durationStatisticsInitialPeriod": 5,
+    "inventories": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32/inventories"
+            }
+        ]
+    },
+    "users": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32/users"
+            }
+        ]
+    },
+    "workZones": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32/workZones"
+            }
+        ]
+    },
+    "workSkills": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32/workSkills"
+            }
+        ]
+    },
+    "workSchedules": {
+        "links": [
+            {
+                "rel": "canonical",
+                "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32/workSchedules"
+            }
+        ]
+    },
+    "links": [
+        {
+            "rel": "canonical",
+            "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/resources/32"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://sunrise0681.etadirect.com/rest/ofscCore/v1/metadata-catalog/resources"
+        }
+    ]
+}

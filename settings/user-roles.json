@@ -1,0 +1,15 @@
+{
+  "userroles":[
+    {
+      "name": "Administrators",
+      "description": "Admin Role for contractor users management",
+      "id": "Administrators",
+      "defaultMapping": {}
+    }    ,
+    {
+      "name": "Contractors",
+      "description": "Contractors group for user upload management",
+      "id": "Contractors"
+    }
+  ]
+}

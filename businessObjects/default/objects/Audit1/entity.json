@@ -1,0 +1,82 @@
+{
+    "fields": [
+        {
+            "type": "number",
+            "name": "id",
+            "internal": true,
+            "key": true,
+            "oid": "b4447b54-ee9c-408e-9f87-6e158b4ce1dd",
+            "required": true,
+            "unique": true,
+            "displayLabel": "Id"
+        },
+        {
+            "type": "datetime",
+            "name": "creationDate",
+            "internal": true,
+            "oid": "7ff6b788-fa8c-4e28-bd7b-053ea9a39ac2",
+            "displayLabel": "Created"
+        },
+        {
+            "type": "datetime",
+            "name": "lastUpdateDate",
+            "internal": true,
+            "oid": "1f86cfec-f81b-4cd2-8033-d6bebef63333",
+            "displayLabel": "Last Updated"
+        },
+        {
+            "type": "string",
+            "name": "createdBy",
+            "internal": true,
+            "oid": "6134dabc-3a5d-4912-a86f-437aa0d0f938",
+            "displayLabel": "Created By"
+        },
+        {
+            "type": "string",
+            "name": "lastUpdatedBy",
+            "internal": true,
+            "oid": "1535f6c9-7526-43ca-b829-62b26acd5c9e",
+            "displayLabel": "Last Updated By"
+        },
+{
+            "type": "number",
+            "hidden": true,
+            "name": "abcsChangeNumber",
+            "internal": true,
+            "oid": "bbd40872-8b57-402a-b5be-8442949345a2",
+            "displayLabel": "<internal>"
+        },
+        {
+            "type": "reference",
+            "name": "recordId",
+            "oid": "ee131d6b-cf9e-427b-b025-c9c8a143b562",
+            "displayLabel": "recordId"
+        }        ,
+        {
+            "type": "string",
+            "name": "type1",
+            "oid": "fa05c364-9561-4674-93d0-467a2f3c7b19",
+            "displayLabel": "type"
+        }        ,
+        {
+            "type": "string",
+            "name": "message",
+            "oid": "670ceaa3-e094-4424-ac51-0d118cf319f3",
+            "displayLabel": "message"
+        }
+    ],
+    "name": "Audit1",
+    "oid": "3a706929-4f2a-4811-b683-72a33ef861ad",
+    "displayLabel": "Audit",
+    "relationships": [
+        {
+            "name": "recordIdObject",
+            "reverseRelationship": "auditCollection",
+            "targetEntity": "DataLoadDetail",
+            "type": "outgoing",
+            "exposeAccessor": true,
+            "mappingField": "recordId",
+            "deleteRule": "restrict"
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "fields": [
+        {
+            "type": "number",
+            "name": "id",
+            "internal": true,
+            "key": true,
+            "oid": "bcfe4925-8bb5-42fe-b3fa-43a201a0275c",
+            "required": true,
+            "unique": true,
+            "displayLabel": "Id"
+        },
+        {
+            "type": "datetime",
+            "name": "creationDate",
+            "internal": true,
+            "oid": "0779447a-5091-4f8e-a976-45c1dd7cb921",
+            "displayLabel": "Created"
+        },
+        {
+            "type": "datetime",
+            "name": "lastUpdateDate",
+            "internal": true,
+            "oid": "763d995b-bacb-43a7-b6fd-7f471915146c",
+            "displayLabel": "Last Updated"
+        },
+        {
+            "type": "string",
+            "name": "createdBy",
+            "internal": true,
+            "oid": "3d2922b4-29d6-46cd-8728-c91a6c9027e1",
+            "displayLabel": "Created By"
+        },
+        {
+            "type": "string",
+            "name": "lastUpdatedBy",
+            "internal": true,
+            "oid": "32404fe2-780d-47bf-8471-2d9faa6578f5",
+            "displayLabel": "Last Updated By"
+        },
+{
+            "type": "number",
+            "hidden": true,
+            "name": "abcsChangeNumber",
+            "internal": true,
+            "oid": "c5789c08-d71b-4c16-ac5b-daa872678607",
+            "displayLabel": "<internal>"
+        },
+        {
+            "type": "string",
+            "name": "status",
+            "oid": "622f6f84-bdc0-4e16-91fa-339ba59e3dde",
+            "displayLabel": "Status"
+        }        ,
+        {
+            "type": "boolean",
+            "name": "validated",
+            "oid": "ebdb9e25-6673-4039-aca1-7cca72acfeca",
+            "displayLabel": "Validated"
+        }        ,
+        {
+            "type": "string",
+            "name": "validatedBy",
+            "oid": "eff9362e-d7ad-4a75-bad4-bd067257d4ca",
+            "displayLabel": "ValidatedBy"
+        }        ,
+        {
+            "type": "string",
+            "name": "notes",
+            "oid": "b1c3ab14-e3a4-4a8c-9ab3-f075ff336af9",
+            "displayLabel": "Notes"
+        }        ,
+        {
+            "type": "reference",
+            "name": "users",
+            "oid": "2148a1e8-b02b-4316-bad9-e423422acb14",
+            "displayLabel": "Users"
+        }        ,
+        {
+            "type": "number",
+            "name": "contractorId",
+            "oid": "0ffdc339-8fe6-4625-bfc1-1763ad908c17",
+            "displayLabel": "ContractorId"
+        }        ,
+        {
+            "type": "reference",
+            "name": "contractors",
+            "oid": "f1094c61-ff69-4ccd-a317-9c3773699743",
+            "displayLabel": "Contractors"
+        }
+    ],
+    "name": "DataLoadIndex",
+    "oid": "b83e955c-776d-4219-876e-3a66c5b2f41d",
+    "displayLabel": "DataLoadIndex",
+    "relationships": [
+        {
+            "name": "usersObject",
+            "reverseRelationship": "dataLoadIndexCollection",
+            "targetEntity": "Users",
+            "type": "outgoing",
+            "exposeAccessor": true,
+            "mappingField": "users",
+            "deleteRule": "restrict"
+        },
+        {
+            "name": "contractorsObject",
+            "reverseRelationship": "dataLoadIndexCollection",
+            "targetEntity": "Contractors",
+            "type": "outgoing",
+            "exposeAccessor": true,
+            "mappingField": "contractors",
+            "deleteRule": "restrict"
+        },
+        {
+            "name": "dataLoadDetailCollection",
+            "reverseRelationship": "dataLoadIdObject",
+            "targetEntity": "DataLoadDetail",
+            "type": "incoming",
+            "displayField": "id"
+        }
+    ]
+}

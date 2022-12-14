@@ -1,0 +1,92 @@
+{
+    "fields": [
+        {
+            "type": "number",
+            "name": "id",
+            "internal": true,
+            "key": true,
+            "oid": "4143005a-db38-4585-a149-f62efa0af7d6",
+            "required": true,
+            "unique": true,
+            "displayLabel": "Id"
+        },
+        {
+            "type": "datetime",
+            "name": "creationDate",
+            "internal": true,
+            "oid": "aa2688ad-da13-4296-ae13-3fac0070863a",
+            "displayLabel": "Created"
+        },
+        {
+            "type": "datetime",
+            "name": "lastUpdateDate",
+            "internal": true,
+            "oid": "09af1312-8285-4fe9-bbef-d026cedf8e28",
+            "displayLabel": "Last Updated"
+        },
+        {
+            "type": "string",
+            "name": "createdBy",
+            "internal": true,
+            "oid": "3c124a10-9281-41f1-ae23-82160f237360",
+            "displayLabel": "Created By"
+        },
+        {
+            "type": "string",
+            "name": "lastUpdatedBy",
+            "internal": true,
+            "oid": "b20d43af-e1af-443f-9722-f8dcfd286a9c",
+            "displayLabel": "Last Updated By"
+        },
+{
+            "type": "number",
+            "hidden": true,
+            "name": "abcsChangeNumber",
+            "internal": true,
+            "oid": "a831f694-d25b-4de1-8e83-0df257a6ed38",
+            "displayLabel": "<internal>"
+        },
+        {
+            "type": "string",
+            "name": "ContractorName",
+            "oid": "dfb03e65-e380-4622-a5b3-20d4575854da",
+            "displayLabel": "contractorName"
+        }        ,
+        {
+            "type": "string",
+            "name": "ResourceName",
+            "oid": "2f83ef0d-5c6a-467f-a67d-f9e14079b33e",
+            "displayLabel": "resourceName"
+        }        ,
+        {
+            "type": "string",
+            "name": "status",
+            "oid": "9781d534-bb6f-4bb7-8023-a923ad77c343",
+            "displayLabel": "status"
+        }        ,
+{
+            "type": "string",
+            "name": "notes",
+            "oid": "c17b61e8-4f56-41ba-bf2b-16920b237aae",
+            "displayLabel": "Notes"
+        },
+        {
+            "type": "string",
+            "name": "contractorUserId",
+            "oid": "0b651dab-7065-4fff-84de-b576be775456",
+            "displayLabel": "contractorUserId"
+        }
+    ],
+    "name": "Contractors",
+    "oid": "88cb47c8-556d-4c2f-9fd9-d148ab1b1eb2",
+    "displayLabel": "Contractors",
+    "relationships": [
+        {
+            "name": "dataLoadIndexCollection",
+            "reverseRelationship": "contractorsObject",
+            "targetEntity": "DataLoadIndex",
+            "type": "incoming",
+            "displayField": "id"
+        }
+    ]
+}

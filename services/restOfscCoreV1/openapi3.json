@@ -1,0 +1,533 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Rest OfscCore V1",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://xxxxx.xxxx.com/rest/ofscCore/v1",
+            "description": "Rest OfscCore V1",
+            "x-vb": {
+                "authentication": {
+                    "authenticated": {
+                        "type": "basic",
+                        "credentials": "vb_b08cbf61-7426-4a96-94a5-09df2e44590e"
+                    }
+                },
+                "forceProxy": "cors"
+            }
+        }
+    ],
+    "paths": {
+        "/resources/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "x-vb": {
+                        "defaultValue": ""
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "putResourcesId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostResourcesIdRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putResourcesId/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutResourcesIdResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/putResourcesId/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+               },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            },
+            "get": {
+                "operationId": "getResourcesId2",
+                "parameters": [],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetResourcesId"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getResourcesId2/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "headers": {},
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/resources/{resourceId}": {
+            "parameters": [
+                {
+                    "name": "resourceId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "patch": {
+                "operationId": "updateResourceId",
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostResourcesIdRequest": {
+                "type": "object",
+                "properties": {
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "organization": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "resourceInternalId": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "parentResourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "languageISO": {
+                        "type": "string"
+                    },
+                    "timeZoneDiff": {
+                        "type": "integer"
+                    },
+                    "timeZone": {
+                        "type": "string"
+                    },
+                    "timeZoneIANA": {
+                        "type": "string"
+                    },
+                    "dateFormat": {
+                        "type": "string"
+                    },
+                    "timeFormat": {
+                        "type": "string"
+                    },
+                    "durationStatisticsInitialRatio": {
+                        "type": "integer"
+                    },
+                    "Resource type": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutResourcesIdResponse": {
+                "type": "object",
+                "properties": {
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "organization": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "resourceInternalId": {
+                        "type": "integer"
+                    },
+                    "parentResourceInternalId": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "parentResourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "languageISO": {
+                        "type": "string"
+                    },
+                    "timeZoneDiff": {
+                        "type": "integer"
+                    },
+                    "timeZone": {
+                        "type": "string"
+                    },
+                    "timeZoneIANA": {
+                        "type": "string"
+                    },
+                    "dateFormat": {
+                        "type": "string"
+                    },
+                    "timeFormat": {
+                        "type": "string"
+                    },
+                    "durationStatisticsInitialRatio": {
+                        "type": "integer"
+                    },
+                    "durationStatisticsInitialPeriod": {
+                        "type": "integer"
+                    },
+                    "Resource type": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "type": "string"
+                    },
+                    "inventories": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "users": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workZones": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workSkills": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workSchedules": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetResourcesId": {
+                "type": "object",
+                "properties": {
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "organization": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "resourceInternalId": {
+                        "type": "integer"
+                    },
+                    "parentResourceInternalId": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "parentResourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "languageISO": {
+                        "type": "string"
+                    },
+                    "timeZoneDiff": {
+                        "type": "integer"
+                    },
+                    "timeZone": {
+                        "type": "string"
+                    },
+                    "timeZoneIANA": {
+                        "type": "string"
+                    },
+                    "dateFormat": {
+                        "type": "string"
+                    },
+                    "timeFormat": {
+                        "type": "string"
+                    },
+                    "durationStatisticsInitialRatio": {
+                        "type": "integer"
+                    },
+                    "durationStatisticsInitialPeriod": {
+                        "type": "integer"
+                    },
+                    "inventories": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "users": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workZones": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workSkills": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "workSchedules": {
+                        "type": "object",
+                        "properties": {
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "rel": {
+                                            "type": "string"
+                                        },
+                                        "href": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
