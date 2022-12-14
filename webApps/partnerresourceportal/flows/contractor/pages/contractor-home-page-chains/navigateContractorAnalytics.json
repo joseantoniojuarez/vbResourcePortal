@@ -1,0 +1,13 @@
+{
+  "description": "navigate to contractor analytics page",
+  "root": "navigateToContractorAnalytics",
+  "actions": {
+    "navigateToContractorAnalytics": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "contractor-analytics"
+      }
+    }
+  },
+  "variables": {}
+}

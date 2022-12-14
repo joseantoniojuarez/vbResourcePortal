@@ -1,0 +1,124 @@
+{
+  "description": "Upload the Details to business object",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestCreateUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      },
+      "outcomes": {
+        "success": "callFunctionDeselectAll2"
+      }
+    },
+    "callRestCreateUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/batch",
+        "body": "{{ $chain.results.callFunctionCreateBatchPayload1 }}"
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "fireNotification3"
+      }
+    },
+    "fireNotification3": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "type": "confirmation",
+        "summary": "Successful data inserted!!"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    },
+    "resetVariablesTrackingADP": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.trackingADP",
+          "$page.variables.rowStatus"
+        ]
+      },
+      "outcomes": {
+        "success": "callFunctionDeselectAll"
+      }
+    },
+    "callFunctionCreateBatchPayload1": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createBatchPayload1",
+        "params": [
+          "{{ $page.variables.trackingADP.data }}",
+          "{{ $application.user.fullName }}",
+          "{{ $application.user.userId }}"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestCreateUsers"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionCreateBatchPayload1"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      },
+      "outcomes": {
+        "success": "resetVariablesTrackingADP"
+      }
+    },
+    "callFunctionDeselectAll": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "deselectAll"
+      },
+      "outcomes": {
+        "success": "callChainFetchUserDataCopy"
+      }
+    },
+    "callFunctionDeselectAll2": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "deselectAll"
+      }
+    },
+    "callComponentUserDataRefresh": {
+      "module": "vb/action/builtin/callComponentMethodAction",
+      "parameters": {
+        "component": "{{ document.getElementById('user_data') }}",
+        "method": "refresh"
+      },
+      "outcomes": {}
+    },
+    "callChainFetchUserDataCopy": {
+      "module": "vb/action/builtin/callChainAction",
+      "parameters": {
+        "id": "refreshTable"
+      },
+      "outcomes": {
+        "success": "callComponentUserDataRefresh"
+      }
+    }
+  },
+  "variables": {}
+}

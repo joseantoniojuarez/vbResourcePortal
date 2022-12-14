@@ -1,0 +1,93 @@
+{
+  "description": "Actions to be performed in case of rejection scenario",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "callFunctionCreateBatchPayload": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createBatchPayload",
+        "params": [
+          "{{ $page.variables.trackingADP.data }}",
+          "{{ $page.variables.rowStatusSelected }}",
+          "rejected"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestBatch"
+      }
+    },
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestBatch.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestBatch": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/batch",
+        "body": "{{ $chain.results.callFunctionCreateBatchPayload }}"
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "fireNotification3"
+      }
+    },
+    "fireNotification3": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "type": "confirmation",
+        "displayMode": "transient",
+        "summary": "Rejection Successful!!",
+        "message": "Rejection Successful!!"
+      },
+      "outcomes": {
+        "success": "callFunctionDeselectAll"
+      }
+    },
+    "callChainLoadData": {
+      "module": "vb/action/builtin/callChainAction",
+      "parameters": {
+        "id": "loadData"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+    }
+    },
+    "callFunctionDeselectAll": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "deselectAll"
+      },
+      "outcomes": {
+        "success": "callChainLoadData"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionCreateBatchPayload"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      }
+    }
+  },
+  "variables": {}
+}

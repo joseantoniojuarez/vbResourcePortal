@@ -1,0 +1,192 @@
+<!-- Mobile only header and page title -->
+<header role="banner" class="oj-sm-flex-initial vb-web-applayout-header oj-md-hide">
+  <div role="image" class="vb-web-applayout-header-image-stripe"></div>
+  <div class="oj-flex-bar oj-sm-align-items-center vb-web-applayout-header-content">
+    <!-- Navigator toggle button will render only if we have a drawer -->
+    <oj-bind-if test="[[ document.querySelector('oj-vb-fragment[name=\'shell-drawer\']') ]]">
+      <div class="oj-flex-bar">
+        <oj-button on-oj-action="[[$listeners.toggleDrawer]]" chroming="borderless"
+                   display="icons">
+          <span slot="startIcon" class="oj-ux-ico-menu"></span>
+          <span><oj-bind-text value="[[$application.translations.app.app_title_navigation_drawer]]"></oj-bind-text></span>
+        </oj-button>
+      </div>
+    </oj-bind-if>
+    <!-- Page specific title and actions with overflow menu displayed -->
+    <div class="oj-sm-margin-2x-horizontal oj-sm-align-items-center oj-md-hide oj-sm-flex-1">
+      <div class="vb-content-header oj-flex oj-sm-flex-items-initial oj-sm-align-items-center">
+        <div class="oj-flex-item">
+          <div class="oj-typography-body-lg oj-typography-semi-bold">
+            <oj-bind-text value="main"></oj-bind-text>
+          </div>
+          <!-- Add Page specific actions etc -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page specific title and actions for desktop formfactor -->
+<div class="oj-flex oj-lg-margin-12x-top oj-md-margin-12x-top">
+  <div class="oj-flex-item oj-sm-12 oj-md-2">
+    <oj-button chroming="borderless" class="homepage-button" on-oj-action="[[$listeners.buttonAction3]]" >
+          <span class="oj-ux-ico-up-parent textcolor" slot="startIcon"></span>
+          <oj-highlight-text text="Homepage" match-text="Highlight" slot="startIcon" class="highlighter"></oj-highlight-text>
+    </oj-button>
+  </div>
+</div>
+<div class="oj-flex">
+  <div class="oj-flex oj-flex-item oj-sm-6 oj-md-3">
+    <h1 class="oj-flex-item oj-sm-12 page-headers oj-md-12 textcolor">Add Resources</h1>
+  </div>
+</div>
+<div class="oj-flex">
+  <div class="oj-panel oj-flex-item oj-sm-12 oj-md-12" style="min-height:600px">
+    <div class="oj-flex">
+          <oj-label class="oj-helper-text-align-left oj-flex-item oj-sm-12 oj-md-4">Upload File:</oj-label>
+    </div>
+    <div class="oj-flex">
+          <oj-file-picker id="contractor_file_upload" on-oj-select="[[$listeners.contractorFileUploadSelect]]"
+            class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-only-margin-5x-bottom" selection-mode="single"></oj-file-picker>
+          <div class="oj-flex-item oj-sm-12 oj-md-4"></div>
+          <div class="oj-flex-item oj-sm-12 oj-md-2">
+            <oj-button label="Add" on-oj-action="[[$listeners.buttonAction2]]" style="float:right; margin-right:5px"></oj-button>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-2">
+            <oj-button label="Save" on-oj-action="[[$listeners.buttonAction]]"></oj-button>
+          </div>
+    </div>
+    <div class="oj-flex">
+          <oj-text-area rows="1" id="TextArea_fileName" placeholder="Filename" value="{{ $variables.Filelist.name }}"
+            class="oj-flex-item oj-sm-12 oj-md-4" readonly="true"></oj-text-area>
+    </div>
+    <div class="oj-flex">
+          <oj-table scroll-policy="loadMoreOnScroll" id="user_data" data="[[ $variables.usersADP ]]" edit-mode="rowEdit"
+            columns='[{"headerText":"Name","field":"Name","template":"Name"},{"headerText":"Email","field":"Email","template":"Email"},{"headerText":"Phone","field":"Phone","template":"Phone"},{"headerText":"Crew","field":"Crew","template":"Crew"},{"headerText":"State","field":"State","template":"State"},{"headerText":"Role1","field":"Role1","template":"Role1"},{"headerText":"Event","field":"Event","template":"Event"},{"headerText":"LodgingRequired","field":"LodgingRequired","template":"LodgingRequired"},{"headerText":"TypeofLodging","field":"TypeofLodging","template":"TypeofLodging"},{"headerText":"Division","field":"Division","template":"Division"},{"headerText":"Actions","field":"","template":"Actions","sortable":"disabled","resizable":"disabled","style":"padding-top: 0px; padding-bottom: 0px;"}]'
+            on-oj-before-row-edit="[[$listeners.userDataBeforeRowEdit]]"
+            on-oj-before-row-edit-end="[[$listeners.userDataBeforeRowEditEnd]]" class="oj-flex-item oj-sm-12 oj-md-12">
+    
+        
+            <template slot="Name">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Name }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+        
+            <template slot="Email">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Email }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+          
+            <template slot="Phone">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Phone }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+           
+            <template slot="Crew">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Crew }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+           
+            <template slot="State">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.State }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+          
+            <template slot="Role1">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Role1 }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+           
+            <template slot="LodgingRequired">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.LodgingRequired }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+           
+            <template slot="TypeofLodging">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.TypeofLodging }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+            
+            <template slot="Division">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Division }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+              <template slot="Event">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-input-text value='[[$current.data]]' :id="[['oj-input-item' + $current.key]]" readonly="true"></oj-input-text>
+          </oj-bind-if>
+          <oj-bind-if test='[[$current.mode === "edit"]]'>
+            <oj-input-text class="editable" value="{{ $variables.currentRowBuffer.Event }}"
+              :id="[['oj-input-item' + $current.key]]"></oj-input-text>
+          </oj-bind-if>
+            </template>
+
+       
+            <template slot="Actions">
+          <oj-bind-if test='[[$current.mode === "navigation"]]'>
+            <oj-button :id="[['delete-row-button-' + $current.row.id]]" chroming="borderless"
+              on-oj-action="[[$listeners.deleteRowButtonCurrentRowIdAction]]">
+              <span class="vb-icon vb-icon-delete-trash-can"></span>
+            </oj-button>
+          </oj-bind-if>
+            </template>
+          </oj-table>
+    </div>
+  </div>
+</div>
+
+

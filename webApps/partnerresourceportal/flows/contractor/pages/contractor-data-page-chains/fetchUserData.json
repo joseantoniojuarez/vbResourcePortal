@@ -1,0 +1,42 @@
+{
+  "root": "callRestGetallUsers",
+  "description": "Fetches User Data on page load",
+  "variables": {},
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestGetallUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestGetallUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/getall_Users",
+        "uriParams": {
+          "q": "{{ \"contractorUserId= '\" + $application.variables.userId + \"'\" }}",
+          "limit": 100000000
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "assignVariablesUserListADP"
+      }
+    },
+    "assignVariablesUserListADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.userListADP": {
+          "source": {
+            "data": "{{ $chain.results.callRestGetallUsers.body.items }}"
+          },
+          "reset": "none",
+          "auto": "always"
+        }
+      }
+    }
+  }
+}

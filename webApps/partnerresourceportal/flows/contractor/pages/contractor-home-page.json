@@ -1,0 +1,51 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {},
+  "metadata": {},
+  "types": {},
+  "eventListeners": {
+    "objectCardClick": {
+      "chains": [
+        {
+          "chainId": "navigateContractorResourcesPage"
+        }
+      ]
+    },
+    "objectCardClick2": {
+      "chains": [
+        {
+          "chainId": "navigateContractorAnalytics"
+        }
+      ]
+    },
+    "objectCardSpCardAction": {
+      "chains": [
+        {
+          "chainId": "navigateContractorData"
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-sp-object-card": {
+        "path": "oj-sp/object-card/loader"
+      }
+    }
+  }
+}

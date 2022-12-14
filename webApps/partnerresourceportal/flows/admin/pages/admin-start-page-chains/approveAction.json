@@ -1,0 +1,130 @@
+{
+  "description": "Actions to be triggered in case of approve scenario",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "callFunctionCreateBatchPayload": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createBatchPayload",
+        "params": [
+          "{{ $page.variables.trackingADP.data }}",
+          "{{ $page.variables.rowStatusSelected }}"          ,
+          "Approved"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestBatch"
+      }
+    },
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestBatch.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestBatch": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/batch",
+        "body": "{{ $chain.results.callFunctionCreateBatchPayload }}",
+        "responseBodyFormat": "json"
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "assignVariablesBatchResponse"
+      }
+    },
+    "resetVariablesTrackingADP": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.trackingADP",
+          "$page.variables.batchResponse"
+        ]
+      },
+      "outcomes": {
+        "success": "callFunctionDeselectAll"
+      }
+    },
+    "callFunctionTriggerImport": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "triggerImport",
+        "params": [
+          "{{ $page.variables.batchResponse }}"
+        ]
+      },
+      "outcomes": {
+        "success": "resetVariablesTrackingADP"
+      }
+    },
+    "assignVariablesBatchResponse": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.batchResponse": {
+          "source": "{{ $chain.results.callRestBatch.body.parts }}"
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionTriggerImport"
+      }
+    },
+    "callFunctionDeselectAll": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "deselectAll"
+      },
+      "outcomes": {
+        "success": "fireNotification3"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionCreateBatchPayload"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      },
+      "outcomes": {
+      }
+    },
+    "callChainLoadData": {
+      "module": "vb/action/builtin/callChainAction",
+      "parameters": {
+        "id": "loadData"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    },
+    "fireNotification3": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "Selected records are approved!!",
+        "type": "confirmation"
+      },
+      "outcomes": {
+        "success": "callChainLoadData"
+      }
+    }
+  },
+  "variables": {}
+}

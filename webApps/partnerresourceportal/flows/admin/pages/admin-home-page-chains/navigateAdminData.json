@@ -1,0 +1,18 @@
+{
+  "description": "navigate to admin data page",
+  "root": "navigateToAdminAdminData",
+  "actions": {
+    "navigateToAdminAdminData": {
+      "module": "vb/action/builtin/navigateAction",
+      "@dt": {
+        "targetType": "flow"
+      },
+      "parameters": {
+        "target": "parent",
+        "flow": "admin",
+        "page": "admin-data"
+      }
+    }
+  },
+  "variables": {}
+}

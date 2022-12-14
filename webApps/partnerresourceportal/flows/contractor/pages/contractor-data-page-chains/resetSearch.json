@@ -1,0 +1,66 @@
+{
+  "description": "reset search criteria with default filter",
+  "root": "resetVariablesFilters",
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestGetallUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestGetallUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/getall_Users",
+        "requestTransformOptions": {
+          "filter": {
+            "op": "$and",
+            "criteria": "[[$functions.mapToCriteria($page.variables.filters,$application.variables.userId)]]"
+          }
+        },
+        "uriParams": {
+
+          "limit": "100000000"
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "assignVariablesUserListADP"
+      }
+    },
+    "assignVariablesUserListADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.userListADP": {
+          "source": {
+            "data": "{{ $chain.results.callRestGetallUsers.body.items }}"
+          },
+          "reset": "none",
+          "auto": "always",
+          "mapping": {
+            "$target.data": {
+              "source": "$source.data",
+              "reset": "empty"
+            }
+          }
+        }
+      }
+    },
+    "resetVariablesFilters": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.filters"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestGetallUsers"
+      }
+    }
+  },
+  "variables": {
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "description": "navigate to admin start page",
+  "root": "navigateToAdminStart",
+  "actions": {
+    "navigateToAdminStart": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "admin-start"
+      }
+    }
+  },
+  "variables": {}
+}

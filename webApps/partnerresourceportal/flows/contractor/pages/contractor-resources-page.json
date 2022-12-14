@@ -1,0 +1,169 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "columns": {
+      "type": "any"
+    },
+    "currentRowBuffer": {
+      "type": "create_Users"
+    },
+    "dataArr": {
+      "type": "any"
+    },
+    "excelData": {
+      "type": "any"
+    },
+    "Filelist": {
+      "type": {
+        "file": "object",
+        "lastmodifieddate": "string",
+        "name": "string",
+        "size": "number"
+      }
+    },
+    "rowStatus": {
+      "type": "object"
+    },
+    "usersADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "create_Users",
+        "keyAttributes": "Id"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.create_Users": {
+      "endpoint": "create_Users",
+      "service": "businessObjects",
+      "path": "request"
+    },
+    "create_Users": {
+      "Crew": "string",
+      "Division": "string",
+      "Email": "string",
+      "Event": "string",
+      "Id": "number",
+      "lastUpdateDate": "string",
+      "lastUpdatedBy": "string",
+      "LodgingRequired": "boolean",
+      "Name": "string",
+      "notes": "string",
+      "Phone": "string",
+      "Role1": "string",
+      "State": "string",
+      "TypeofLodging": "string",
+      "Status": "string"
+
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chainId": "saveChanges"
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chainId": "addRecord"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chainId": "navigateHome"
+        }
+      ]
+    },
+    "contractorFileUploadSelect": {
+      "chains": [
+        {
+          "chainId": "FilePickerSelectChain",
+          "parameters": {
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "detail": "{{ $event.detail.files }}"
+          }
+        }
+      ]
+    },
+    "deleteRowButtonCurrentRowIdAction": {
+      "chains": [
+        {
+          "chainId": "deleteRecord",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    },
+    "userDataBeforeRowEdit": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "userDataBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{ $variables.currentRowBuffer }}",
+            "originalData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-highlight-text": {
+        "path": "ojs/ojhighlighttext"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "description": "",
+  "root": "ifFilters",
+  "actions": {
+    "ifFilters": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ ['Updated','InProgress','Modified'].includes($page.variables.filters[3].value) ]]"
+      },
+      "outcomes": {
+        "false": "assignVariablesFilters"
+      }
+    },
+    "assignVariablesFilters": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.filters[3].value": {
+          "source": "dummy"
+        }
+      }
+    }
+  },
+  "variables": {
+    "value": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    }
+  }
+}

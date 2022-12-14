@@ -1,0 +1,13 @@
+{
+  "description": "",
+  "root": "navigateToContractorHome",
+  "actions": {
+    "navigateToContractorHome": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "contractor-home"
+      }
+    }
+  },
+  "variables": {}
+}

@@ -1,0 +1,13 @@
+{
+  "description": "navigate to contractor data page",
+  "root": "navigateToContractorData",
+  "actions": {
+    "navigateToContractorData": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "contractor-data"
+      }
+    }
+  },
+  "variables": {}
+}

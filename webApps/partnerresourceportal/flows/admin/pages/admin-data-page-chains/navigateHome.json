@@ -1,0 +1,18 @@
+{
+  "description": "Navigates to Home page",
+  "root": "navigateToAdminAdminHome",
+  "actions": {
+    "navigateToAdminAdminHome": {
+      "module": "vb/action/builtin/navigateAction",
+      "@dt": {
+        "targetType": "flow"
+      },
+      "parameters": {
+        "target": "parent",
+        "flow": "admin",
+        "page": "admin-home"
+      }
+    }
+  },
+  "variables": {}
+}

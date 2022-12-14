@@ -1,0 +1,48 @@
+{
+  "root": "callRestGetallUsers",
+  "description": "Load the initial set of data",
+  "variables": {},
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestGetallUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestGetallUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/getall_Users",
+        "uriParams": {
+          "limit": 300,
+          "q": "status in ('InProgress','Updated','modified')"
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "assignVariablesUsersADP"
+      }
+    },
+    "assignVariablesUsersADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.usersADP": {
+          "source": {
+            "data": "{{ $chain.results.callRestGetallUsers.body.items }}"
+          },
+          "reset": "none",
+          "auto": "always",
+          "mapping": {
+            "$target.data": {
+              "source": "$source.data",
+              "reset": "empty"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "description": "Action chain that picks up the file and bind it to the variables",
+  "root": "callFunctionProcessFile",
+  "actions": {
+    "aV_ADP_csvFile": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.Filelist": {
+          "source": {
+            "name": "{{ $chain.variables.detail[0].name }}",
+            "size": "{{ $chain.variables.detail[0].size }}",
+            "file": "{{ $chain.variables.detail[0] }}"
+          },
+          "auto": "always"
+        },
+        "$page.variables.excelData": {
+          "source": "{{ $chain.results.callFunctionProcessFile }}"
+        }
+      },
+      "label": "Assign Variables from detail to csvFile",
+      "outcomes": {
+        "success": "callFunctionCreateDataArray"
+      }
+    },
+    "callFunctionProcessFile": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "processFile",
+        "params": [
+          "{{ $variables.detail }}"
+        ]
+      },
+      "label": "Select file",
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading"
+      }
+    },
+    "callComponentTableExcelDataRefresh": {
+      "module": "vb/action/builtin/callComponentMethodAction",
+      "parameters": {
+        "component": "{{ document.getElementById('user_data') }}",
+        "method": "refresh"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    },
+    "callFunctionCreateColumnsArray": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createColumnsArray",
+        "params": [
+          "{{ $page.variables.excelData }}"
+        ]
+      },
+      "outcomes": {
+        "success": "assignVariablesColumns"
+      }
+    },
+    "callFunctionCreateDataArray": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createDataArray",
+        "params": [
+          "{{ $page.variables.excelData }}"
+        ]
+      },
+      "outcomes": {
+        "success": "callFunctionCreateColumnsArray"
+      }
+    },
+    "assignVariablesColumns": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.columns": {
+          "source": "{{ $chain.results.callFunctionCreateColumnsArray }}"
+        },
+        "$page.variables.dataArr": {
+          "source": "{{ $chain.results.callFunctionCreateDataArray[0] }}"
+        },
+        "$page.variables.usersADP": {
+          "source": {
+            "data": "{{ $chain.results.callFunctionCreateDataArray[0] }}"
+          },
+          "reset": "none",
+          "auto": "always"
+        },
+        "$page.variables.rowStatus": {
+          "source": "{{ $chain.results.callFunctionCreateDataArray[1] }}",
+          "auto": "always"
+        }
+      },
+      "outcomes": {
+        "success": "callComponentTableExcelDataRefresh"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "aV_ADP_csvFile"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      }
+    }
+  },
+  "variables": {
+    "detail": {
+      "type": "object",
+      "required": true,
+      "input": "fromCaller"
+    }
+  }
+}

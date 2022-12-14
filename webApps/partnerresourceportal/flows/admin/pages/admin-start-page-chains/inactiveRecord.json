@@ -1,0 +1,123 @@
+{
+  "description": "Inactive a record",
+  "root": "callRestUpdateUsers",
+  "actions": {
+
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestUpdateUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "fireDataProviderEventTrackingADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.trackingADP ]]",
+        "remove": {
+          "keys": [
+            "{{ $variables.key }}"
+          ]
+        }
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventTrackingEditableADP"
+      }
+    },
+    "callFunctionRemoveObjectData": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "removeObjectData",
+        "params": [
+          "{{ $page.variables.rowStatus }}",
+          "{{ $variables.key }}"
+        ]
+      },
+      "outcomes": {
+        "success": "callChainLoadData"
+      }
+    },
+    "callRestUpdateUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/update_Users",
+        "uriParams": {
+          "Users_Id": "{{ $variables.current.row.id }}"
+        },
+        "body": {
+          "status": "inactive"
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "fireNotification2"
+      }
+    },
+    "fireNotification2": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "displayMode": "transient",
+        "type": "confirmation",
+        "summary": "Record Inactivation successful!!"
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventUsersADP"
+      }
+    },
+    "fireDataProviderEventTrackingEditableADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.trackingEditableADP ]]",
+        "remove": {
+          "keys": [
+            "{{ $variables.key }}"
+          ]
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionRemoveObjectData"
+      }
+    },
+    "fireDataProviderEventUsersADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.usersADP ]]",
+        "remove": {
+          "keys": [
+            "{{ $variables.key }}"
+          ]
+        }
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventTrackingADP"
+      }
+    },
+    "callChainLoadData": {
+      "module": "vb/action/builtin/callChainAction",
+      "parameters": {
+        "id": "loadData"
+      }
+    }
+  },
+  "variables": {
+    "key": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    },
+    "index": {
+      "required": true,
+      "type": "number",
+      "input": "fromCaller"
+    },
+    "current": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "currentRowBuffer": {
+      "type": "getall_Users"
+    },
+    "disableSubmit": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "drawerOpen": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "filters": {
+      "type": "filter[]",
+      "defaultValue": [
+        {
+          "op": "$co",
+          "attribute": "Crew",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Division",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Email",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "status",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Event",
+          "value": ""
+        }
+      ]
+    },
+    "rowData": {
+      "type": "object[]"
+    },
+    "rowStatus": {
+      "type": "object"
+    },
+    "rowStatusSelected": {
+      "type": "object"
+    },
+    "selection": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "trackingADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    },
+    "trackingEditableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    },
+    "userListADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getall_Users": {
+      "endpoint": "getall_Users",
+      "service": "businessObjects",
+      "path": "response-_-items[0]"
+    },
+    "filter": {
+      "attribute": "string",
+      "op": "string",
+      "value": "any"
+    },
+    "getall_Users": {
+      "contractorName": "string",
+      "contractorUserId": "string",
+      "createdBy": "string",
+      "creationDate": "string",
+      "Crew": "string",
+      "Division": "string",
+      "Email": "string",
+      "Event": "string",
+      "id": "number",
+      "LodgingRequired": "boolean",
+      "Name": "string",
+      "notes": "string",
+      "Phone": "string",
+      "Role1": "string",
+      "State": "string",
+      "status": "string",
+      "TypeofLodging": "string"
+    }
+  },
+  "eventListeners": {
+    "buttonAction3": {
+      "chains": [
+        {
+          "chainId": "navigateHome"
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chainId": "submitAction"
+        }
+      ]
+    },
+    "closeFilterAction": {
+      "chains": [
+        {
+          "chainId": "toggleFilterPane",
+          "parameters": {
+            "detail": "{{ $event.detail }}"
+          }
+        }
+      ]
+    },
+    "deleteRowButtonCurrentRowIdAction": {
+      "chains": [
+        {
+          "chainId": "inactiveRecord",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "openFilterAction": {
+      "chains": [
+        {
+          "chainId": "toggleFilterPane",
+          "parameters": {
+            "detail": "{{ $event.detail }}"
+          }
+        }
+      ]
+    },
+    "resetAction": {
+      "chains": [
+        {
+          "chainId": "resetSearch"
+        }
+      ]
+    },
+    "searchAction": {
+      "chains": [
+        {
+          "chainId": "searchData"
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chainId": "SwitchValueChangeChain",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    },
+    "userDataBeforeRowEdit": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "userDataBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{ $variables.currentRowBuffer }}",
+            "originalData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "userDataSelected": {
+      "chains": [
+        {
+          "chainId": "TableSelectedChangeChain",
+          "parameters": {
+            "keys": "{{ $event.detail.value.row.values ? Array.from($event.detail.value.row.values()) : [] }}",
+            "selected": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chainId": "fetchUserData"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-highlight-text": {
+        "path": "ojs/ojhighlighttext"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+    }
+  }
+}

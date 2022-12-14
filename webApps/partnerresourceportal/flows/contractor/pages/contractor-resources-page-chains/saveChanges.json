@@ -1,0 +1,73 @@
+{
+  "description": "Upload the Details to business object",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestCreateUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestCreateUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/batch",
+        "body": "{{ $chain.results.callFunctionCreateBatchPayload }}"
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "fireNotification2"
+      }
+    },
+    "callFunctionCreateBatchPayload": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createBatchPayload",
+        "params": [
+          "{{ $page.variables.usersADP.data }}",
+          "{{ $page.variables.rowStatus }}",
+          "{{ $application.user.fullName }}"          ,
+          "{{ $application.user.userId }}"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestCreateUsers"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "callFunctionCreateBatchPayload"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      }
+    },
+    "fireNotification2": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "type": "confirmation",
+        "summary": "Data committed into business object!!"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    }
+  },
+  "variables": {}
+}

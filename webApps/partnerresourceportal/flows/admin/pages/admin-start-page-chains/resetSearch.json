@@ -1,0 +1,88 @@
+{
+  "description": "Triggers search with default criteria",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestGetallUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestGetallUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/getall_Users",
+        "requestTransformOptions": {
+          "filter": {
+            "op": "$and",
+            "criteria": "[[$functions.mapToCriteria($page.variables.filters)]]"
+          }
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "resetVariablesFilters3"
+      }
+    },
+    "assignVariablesUsersADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.usersADP": {
+          "source": {
+            "data": "{{ $chain.results.callRestGetallUsers.body.items }}"
+          },
+          "reset": "none",
+          "auto": "always"
+        }
+      }
+    },
+    "resetVariablesFilters": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.filters"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestGetallUsers"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "resetVariablesFilters"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      },
+      "outcomes": {
+        "success": "assignVariablesUsersADP"
+      }
+    },
+    "resetVariablesFilters3": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.filters",
+          "$page.variables.usersADP"
+        ]
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    }
+  }
+}

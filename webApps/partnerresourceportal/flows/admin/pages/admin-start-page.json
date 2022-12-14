@@ -1,0 +1,289 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+
+    "batchResponse": {
+      "type": "object[]"
+    },
+    "currentRowBuffer": {
+      "type": "getall_Users"
+    },
+    "drawerOpen": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "filters": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "op": "$co",
+          "attribute": "Crew",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Division",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Email",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "status",
+          "value": ""
+        },
+        {
+          "op": "$co",
+          "attribute": "Event",
+          "value": ""
+        }
+      ]
+    },
+    "rowData": {
+      "type": "object[]"
+    },
+    "rowStatus": {
+      "type": "object"
+    },
+    "rowStatusSelected": {
+      "type": "object"
+    },
+    "selection": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "trackingADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    },
+    "trackingEditableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    },
+    "usersADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getall_Users",
+        "keyAttributes": "id"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getall_Users": {
+      "endpoint": "getall_Users",
+      "service": "businessObjects",
+      "path": "response-_-items[0]"
+    },
+    "getall_Users": {
+
+      "Crew": "string",
+      "Division": "string",
+      "Email": "string",
+      "Event": "string",
+      "id": "number",
+      "LodgingRequired": "boolean",
+      "Name": "string",
+      "notes": "string",
+      "Phone": "string",
+      "Phone1": "number",
+      "Role1": "string",
+      "State": "string",
+      "status": "string",
+      "TypeofLodging": "string",
+      "contractorsid": "number"
+
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chainId": "approveAction"
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chainId": "rejectAction"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chainId": "navigateHome"
+        }
+      ]
+    },
+    "closeFilterAction": {
+      "chains": [
+        {
+          "chainId": "toggleFilterPane",
+          "parameters": {
+            "detail": "{{ $event.detail }}"
+          }
+        }
+      ]
+    },
+    "deleteRowButtonCurrentRowIdAction": {
+      "chains": [
+        {
+          "chainId": "inactiveRecord",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputStatusValue": {
+      "chains": [
+        {
+          "chainId": "InputTextValueChangeChain",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "openFilterAction": {
+      "chains": [
+        {
+          "chainId": "toggleFilterPane",
+          "parameters": {
+            "detail": "{{ $event.detail }}"
+          }
+        }
+      ]
+    },
+    "resetAction": {
+      "chains": [
+        {
+          "chainId": "resetSearch"
+        }
+      ]
+    },
+    "searchAction": {
+      "chains": [
+        {
+          "chainId": "searchData"
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chainId": "SwitchValueChangeChain",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    },
+    "userDataBeforeRowEdit": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "userDataBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chainId": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{ $variables.currentRowBuffer }}",
+            "originalData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "userDataSelected": {
+      "chains": [
+        {
+          "chainId": "TableSelectedChangeChain",
+          "parameters": {
+            "selected": "{{ $event.detail.value }}",
+            "keys": "{{ $event.detail.value.row.values ? Array.from($event.detail.value.row.values()) : [] }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chainId": "loadData"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-highlight-text": {
+        "path": "ojs/ojhighlighttext"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+
+    }
+  }
+}

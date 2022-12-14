@@ -1,0 +1,52 @@
+<!-- Mobile only header and page title -->
+<header role="banner" class="oj-sm-flex-initial vb-web-applayout-header oj-md-hide">
+  <div role="image" class="vb-web-applayout-header-image-stripe"></div>
+  <div class="oj-flex-bar oj-sm-align-items-center vb-web-applayout-header-content">
+    <!-- Navigator toggle button will render only if we have a drawer -->
+    <oj-bind-if test="[[ document.querySelector('oj-vb-fragment[name=\'shell-drawer\']') ]]">
+      <div class="oj-flex-bar">
+        <oj-button on-oj-action="[[$listeners.toggleDrawer]]" chroming="borderless"
+                   display="icons">
+          <span slot="startIcon" class="oj-ux-ico-menu"></span>
+          <span><oj-bind-text value="[[$application.translations.app.app_title_navigation_drawer]]"></oj-bind-text></span>
+        </oj-button>
+      </div>
+    </oj-bind-if>
+    <!-- Page specific title and actions with overflow menu displayed -->
+    <div class="oj-sm-margin-2x-horizontal oj-sm-align-items-center oj-md-hide oj-sm-flex-1">
+      <div class="vb-content-header oj-flex oj-sm-flex-items-initial oj-sm-align-items-center">
+        <div class="oj-flex-item">
+          <div class="oj-typography-body-lg oj-typography-semi-bold">
+            <oj-bind-text value="contractor home"></oj-bind-text>
+          </div>
+          <!-- Add Page specific actions etc -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page specific title and actions for desktop formfactor -->
+<div class="oj-flex">
+  <div class="oj-flex-item oj-sm-12 oj-md-2"></div>
+  <h1 class="oj-flex-item oj-sm-12 oj-helper-justify-content-center oj-md-10 h1header">
+    <oj-label class="titleHeader">Fusion Admin Resource Portal</oj-label>
+    <div class="title"></div>
+    <oj-bind-text value="[[ 'Welcome '+ $application.user.fullName ]]"></oj-bind-text>
+  </h1>
+</div>
+<div class="oj-flex oj-sm-justify-content-center">
+  <oj-sp-object-card class="oj-flex-item oj-sm-flex-initial panelTitle" primary-text="Reporting"
+    secondary-text="Get real-time insights" image.src="[[ $application.path + 'resources/images/img1.png' ]]" badge.status="neutral"
+    on-click="[[$listeners.objectCardClick]]"></oj-sp-object-card>
+  <oj-sp-object-card class="oj-flex-item oj-sm-flex-initial panelTitle" primary-text="Confirm Resources"
+    secondary-text="Confirm the resources"
+    image.src="[[ $application.path + 'resources/images/rra_landing2_card.png' ]]"
+    badge.status="neutral" on-click="[[$listeners.objectCardClick]]"></oj-sp-object-card>
+  <oj-sp-object-card class="oj-flex-item oj-sm-flex-initial panelTitle" primary-text="Manage your data"
+    secondary-text="Manage your app data"
+    image.src="[[ $application.path + 'resources/images/rra_landing3.png' ]]"
+    badge.status="success" on-sp-card-action="[[$listeners.objectCardSpCardAction]]"></oj-sp-object-card>
+</div>
+
+

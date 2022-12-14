@@ -1,0 +1,51 @@
+{
+  "description": "creates a blank record inside the table",
+  "root": "assignVariablesBlankRecord",
+  "actions": {
+    "assignVariablesBlankRecord": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$variables.blankRecord": {
+          "source": {
+            "Id": "{{ $functions.getNextId($page.variables.usersADP.data) }}",
+            "status": "created"
+
+          },
+          "reset": "none",
+          "auto": "always"
+        }
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventUsersADP"
+      }
+    },
+    "assignVariablesRowStatus": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.rowStatus[$chain.variables.blankRecord.Id]": {
+          "source": "inserted"
+        }
+      }
+    },
+    "fireDataProviderEventUsersADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.usersADP ]]",
+        "add": {
+          "data": "{{ $variables.blankRecord }}",
+          "keys": [
+            "{{ $variables.blankRecord.Id }}"
+          ]
+        }
+      },
+      "outcomes": {
+        "success": "assignVariablesRowStatus"
+      }
+    }
+  },
+  "variables": {
+    "blankRecord": {
+      "type": "create_Users"
+    }
+  }
+}

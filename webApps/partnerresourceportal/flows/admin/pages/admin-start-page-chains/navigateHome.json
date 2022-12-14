@@ -1,0 +1,13 @@
+{
+  "description": "navigates to home page",
+  "root": "navigateToAdminHome",
+  "actions": {
+    "navigateToAdminHome": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "admin-home"
+      }
+    }
+  },
+  "variables": {}
+}

@@ -1,0 +1,132 @@
+{
+  "description": "Commits the data during edit mode",
+  "root": "assignVariablesSelection",
+  "actions": {
+    "assignVariablesSelection": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.selection": {
+          "source": "{{ $variables.value }}"
+        },
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "ifTrackingEditableADP"
+      }
+    },
+    "callFunctionCreateBatchPayload": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "createBatchPayload",
+        "params": [
+          "{{ $page.variables.trackingEditableADP.data }}",
+          "{{ $page.variables.rowStatus }}",
+          "{{ $application.user.fullName }}",
+          "{{ $application.user.userId }}"
+        ]
+      },
+      "outcomes": {
+        "success": "callRestBatch"
+      }
+    },
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestBatch.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestBatch": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/batch",
+        "body": "{{ $chain.results.callFunctionCreateBatchPayload }}"
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "fireNotification3"
+      }
+    },
+    "fireNotification3": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "Successful data inserted!!",
+        "type": "confirmation"
+      },
+      "outcomes": {
+        "success": "resetVariablesTrackingEditableADP"
+      }
+    },
+    "ifTrackingEditableADP": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ $page.variables.trackingEditableADP.data.length != 0]]"
+      },
+      "outcomes": {
+        "true": "callFunctionCreateBatchPayload",
+        "false": "assignVariablesDisplayLoading"
+      }
+    },
+    "resetVariablesTrackingEditableADP": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.trackingEditableADP"
+        ]
+      },
+      "outcomes": {
+        "success": "callFunctionDeselectAll"
+      }
+    },
+    "callFunctionDeselectAll": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "deselectAll"
+      },
+      "outcomes": {
+        "success": "callChainFetchUserDataCopy"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      }
+    },
+    "callChainFetchUserDataCopy": {
+      "module": "vb/action/builtin/callChainAction",
+      "parameters": {
+        "id": "refreshTable"
+      },
+      "outcomes": {
+        "success": "callComponentUserDataRefresh"
+      }
+    },
+    "callComponentUserDataRefresh": {
+      "module": "vb/action/builtin/callComponentMethodAction",
+      "parameters": {
+        "component": "{{ document.getElementById('user_data') }}",
+        "method": "refresh"
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading"
+      }
+    }
+  },
+  "variables": {
+    "value": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    }
+  }
+}

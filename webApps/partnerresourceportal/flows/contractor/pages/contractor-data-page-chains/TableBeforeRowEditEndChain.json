@@ -1,0 +1,111 @@
+{
+  "description": "capture row data at the end of edit action",
+  "root": "ifCancelEdit",
+  "actions": {
+
+    "ifCancelEdit": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ $variables.cancelEdit ]]"
+      },
+      "outcomes": {
+        "false": "if"
+      }
+    },
+    "if": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ $functions.areDifferent($variables.originalData, $variables.rowData) ]]"
+      },
+      "outcomes": {
+        "true": "if3"
+      }
+    },
+    "if2": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "{{ $page.variables.rowStatus[$chain.variables.rowKey] === undefined }}"
+      },
+      "outcomes": {
+        "true": "assignVariablesRowStatus"
+      }
+    },
+    "assignVariablesRowStatus": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.rowStatus[$chain.variables.rowKey]": {
+          "source": "modified"
+        }
+      }
+    },
+    "fireDataProviderEventUserListADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.userListADP ]]",
+        "update": {
+          "data": "{{ $variables.rowData }}"
+        }
+      },
+      "outcomes": {
+        "success": "if2"
+      }
+    },
+    "fireDataProviderEventTrackingEditableADP": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "target": "[[ $page.variables.trackingEditableADP ]]",
+        "add": {
+          "data": "{{ $variables.rowData }}"
+        }
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventUserListADP"
+      }
+    },
+    "fireDataProviderEventTrackingEditableADP2": {
+      "module": "vb/action/builtin/fireDataProviderEventAction",
+      "parameters": {
+        "update": {
+          "data": "{{ $variables.rowData }}"
+        },
+        "target": "[[ $page.variables.trackingEditableADP ]]"
+      },
+      "outcomes": {
+        "success": "fireDataProviderEventUserListADP"
+      }
+    },
+    "if3": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ $functions.findData($page.variables.trackingEditableADP.data,$variables.rowData) == undefined ]]"
+      },
+      "outcomes": {
+        "true": "fireDataProviderEventTrackingEditableADP",
+        "false": "fireDataProviderEventTrackingEditableADP2"
+      }
+    }
+  },
+  "variables": {
+    "cancelEdit": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    },
+    "rowKey": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    },
+    "rowData": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    },
+    "originalData": {
+      "type": "object",
+      "description": "",
+      "defaultValue": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+      "input": "fromCaller"
+    }
+  }
+}

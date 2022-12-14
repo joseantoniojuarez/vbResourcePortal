@@ -1,0 +1,87 @@
+{
+  "description": "Searches the user business object with the criteria that is choosen",
+  "root": "assignVariablesDisplayLoading",
+  "actions": {
+    "fireNotification": {
+      "module": "vb/action/builtin/fireNotificationEventAction",
+      "parameters": {
+        "target": "leaf",
+        "summary": "[[ $chain.results.callRestGetallUsers.message.summary ]]",
+        "type": "error",
+        "displayMode": "persist"
+      }
+    },
+    "callRestGetallUsers": {
+      "module": "vb/action/builtin/restAction",
+      "parameters": {
+        "endpoint": "businessObjects/getall_Users",
+        "requestTransformOptions": {
+          "filter": {
+            "op": "$and",
+            "criteria": "[[$functions.mapToCriteria($page.variables.filters)]]"
+          }
+        },
+        "uriParams": {
+          "limit": 1000
+        }
+      },
+      "outcomes": {
+        "failure": "fireNotification",
+        "success": "resetVariablesUserListADP"
+      }
+    },
+    "assignVariablesUserListADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.userListADP": {
+          "source": {
+            "data": "{{ $chain.results.callRestGetallUsers.body.items }}"
+          },
+          "reset": "none",
+          "auto": "always",
+          "mapping": {
+            "$target.data": {
+              "source": "$source.data",
+              "reset": "empty"
+            }
+          }
+        }
+      },
+      "outcomes": {
+        "success": "assignVariablesDisplayLoading2"
+      }
+    },
+    "assignVariablesDisplayLoading": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": true
+        }
+      },
+      "outcomes": {
+        "success": "callRestGetallUsers"
+      }
+    },
+    "assignVariablesDisplayLoading2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.displayLoading": {
+          "source": false
+        }
+      }
+    },
+    "resetVariablesUserListADP": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.userListADP"
+        ]
+      },
+      "outcomes": {
+        "success": "assignVariablesUserListADP"
+      }
+    }
+  },
+  "variables": {
+  }
+}

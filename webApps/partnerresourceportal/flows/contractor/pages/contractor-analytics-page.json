@@ -1,0 +1,109 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "usersListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "businessObjects/getall_Users",
+        "keyAttributes": "id",
+        "itemsPath": "items",
+        "responseType": "getallUsersResponse"
+      }
+    },
+    "usersListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "businessObjects/getall_Users",
+        "keyAttributes": "id",
+        "itemsPath": "items",
+        "responseType": "getallUsersResponse2"
+      }
+    },
+    "usersListSDP3": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "businessObjects/getall_Users",
+        "keyAttributes": "id",
+        "itemsPath": "items",
+        "responseType": "getallUsersResponse3"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getallUsersResponse": {
+      "endpoint": "getall_Users",
+      "service": "businessObjects",
+      "path": "response"
+    },
+    "@decorators.getallUsersResponse2": {
+      "endpoint": "getall_Users",
+      "service": "businessObjects",
+      "path": "response"
+    },
+    "@decorators.getallUsersResponse3": {
+      "endpoint": "getall_Users",
+      "service": "businessObjects",
+      "path": "response"
+    },
+    "getallUsersResponse": {
+      "items": [
+        {
+          "contractorsid": "number",
+          "Crew": "string",
+          "id": "number"
+        }
+      ]
+    },
+    "getallUsersResponse2": {
+      "items": [
+        {
+          "Crew": "string",
+          "id": "number"
+        }
+      ]
+    },
+    "getallUsersResponse3": {
+      "items": [
+        {
+          "Crew": "string",
+          "id": "number"
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chainId": "ButtonActionChain"
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-chart": {
+        "path": "ojs/ojchart"
+      },
+      "oj-chart-item": {
+        "path": "ojs/ojchart"
+      },
+      "oj-highlight-text": {
+        "path": "ojs/ojhighlighttext"
+      }
+    }
+  }
+}

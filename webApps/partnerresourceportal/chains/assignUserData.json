@@ -1,0 +1,15 @@
+{
+  "root": "assignVariablesUserId",
+  "description": "",
+  "variables": {},
+  "actions": {
+    "assignVariablesUserId": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$application.variables.userId": {
+          "source": "{{ $application.user.userId }}"
+        }
+      }
+    }
+  }
+}

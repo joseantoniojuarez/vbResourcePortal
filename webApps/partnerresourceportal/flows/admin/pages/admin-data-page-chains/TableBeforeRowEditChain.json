@@ -1,0 +1,24 @@
+{
+  "description": "capture row data before edit event",
+  "root": "assignVariablesCurrentRowBuffer",
+  "actions": {
+    "assignVariablesCurrentRowBuffer": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.currentRowBuffer": {
+          "source": "{{ $variables.rowData }}",
+          "auto": "always"
+        }
+      }
+    }
+  },
+  "variables": {
+
+    "rowData": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    }
+
+  }
+}

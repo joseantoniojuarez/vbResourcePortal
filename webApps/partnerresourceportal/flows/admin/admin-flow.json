@@ -1,0 +1,16 @@
+{
+  "id": "admin",
+  "description": "Flow main",
+  "defaultPage": "admin-home",
+  "services": {},
+  "types": {},
+  "variables": {},
+  "security": {
+    "access": {
+      "requiresAuthentication": true,
+      "roles": [
+        "Administrators"
+      ]
+    }
+  }
+}

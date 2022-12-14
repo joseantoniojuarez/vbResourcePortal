@@ -1,0 +1,16 @@
+{
+  "id": "contractor",
+  "description": "Flow main",
+  "defaultPage": "contractor-home",
+  "services": {},
+  "types": {},
+  "variables": {},
+  "security": {
+    "access": {
+      "requiresAuthentication": true,
+      "roles": [
+        "Contractors"
+      ]
+    }
+  }
+}

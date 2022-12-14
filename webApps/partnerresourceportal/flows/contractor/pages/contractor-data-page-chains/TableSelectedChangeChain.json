@@ -1,0 +1,107 @@
+{
+  "description": "Perform the actions to be performed on select/unselect",
+  "root": "resetVariables",
+  "actions": {
+
+    "resetVariables": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.rowData"
+        ]
+      },
+      "outcomes": {
+        "success": "if"
+      }
+    },
+    "if": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ !$variables.selected.row.isAddAll() ]]"
+      },
+      "outcomes": {
+        "true": "callFunctionGetRowsForIDs",
+        "false": "resetVariablesTrackingADP"
+      }
+    },
+    "callFunctionGetRowsForIDs": {
+      "module": "vb/action/builtin/callModuleFunctionAction",
+      "parameters": {
+        "module": "[[ $functions ]]",
+        "functionName": "getRowsForIDs",
+        "params": [
+          "{{ document.getElementById('user_data') }}",
+          "{{ Array.from($variables.selected.row.values()) }}"
+        ]
+      },
+      "outcomes": {
+        "success": "assignVariablesRowData"
+      }
+    },
+    "assignVariablesRowData": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.rowData": {
+          "source": "{{ $chain.results.callFunctionGetRowsForIDs }}",
+          "reset": "empty"
+        },
+        "$page.variables.rowStatusSelected[$chain.variables.keys]": {
+          "source": "modified"
+        }
+      },
+      "outcomes": {
+        "success": "assignVariablesTrackingADP"
+      }
+    },
+    "resetVariablesTrackingADP": {
+      "module": "vb/action/builtin/resetVariablesAction",
+      "parameters": {
+        "variables": [
+          "$page.variables.trackingADP"
+        ]
+      },
+      "outcomes": {
+        "success": "assignVariablesTrackingADP2"
+      }
+    },
+    "assignVariablesTrackingADP2": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.trackingADP": {
+          "source": {
+            "data": "{{ $page.variables.userListADP.data }}"
+          },
+          "reset": "none",
+          "auto": "always"
+
+        }
+      }
+    },
+    "assignVariablesTrackingADP": {
+      "module": "vb/action/builtin/assignVariablesAction",
+      "parameters": {
+        "$page.variables.trackingADP": {
+          "source": {
+            "data": "{{ $chain.results.callFunctionGetRowsForIDs }}"
+          },
+          "auto": "always"
+        },
+        "$page.variables.disableSubmit": {
+          "source": false
+        }
+      }
+    }
+  },
+  "variables": {
+    "selected": {
+      "required": true,
+      "type": "any",
+      "input": "fromCaller"
+    },
+    "keys": {
+      "type": "any",
+      "description": "",
+      "input": "fromCaller"
+    }
+  }
+}

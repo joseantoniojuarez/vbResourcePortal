@@ -1,0 +1,13 @@
+{
+  "description": "Navigate to Contractor resources page",
+  "root": "navigateToContractorStart",
+  "actions": {
+    "navigateToContractorStart": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "contractor-resources"
+      }
+    }
+  },
+  "variables": {}
+}

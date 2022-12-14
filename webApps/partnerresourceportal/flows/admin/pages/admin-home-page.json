@@ -1,0 +1,44 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {},
+  "metadata": {},
+  "types": {},
+  "eventListeners": {
+    "objectCardClick": {
+      "chains": [
+        {
+          "chainId": "navigateAdminPage"
+        }
+      ]
+    },
+    "objectCardSpCardAction": {
+      "chains": [
+        {
+          "chainId": "navigateAdminData"
+        }
+      ]
+    },
+    "toggleDrawer": {
+      "chains": [
+        {
+          "chainId": "application:toggleDrawerHandler"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-sp-object-card": {
+        "path": "oj-sp/object-card/loader"
+      }
+    }
+  }
+}
