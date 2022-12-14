@@ -1,0 +1,123 @@
+.page-headers {
+color:#38332f; 
+font-family:Georgia; 
+font-weight:normal; 
+font-size:28px; 
+margin-bottom:30px; 
+margin-top:30px
+}
+
+.panelTitle span {
+  font-size: 18px !important;
+}
+
+/* CoE Loading image */
+
+@keyframes coe-spinner {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.coe-spinner div { box-sizing: border-box!important }
+.coe-spinner > div {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 58px;
+  left: 58px;
+  border-radius: 50%;
+  border: 4.34px solid #000;
+  border-color: #f0cc71 transparent #f0cc71 transparent;
+  animation: coe-spinner 0.5s linear infinite;
+}
+.coe-spinner > div:nth-child(2) { border-color: transparent }
+.coe-spinner > div:nth-child(2) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.coe-spinner > div:nth-child(2) div:before, .coe-spinner > div:nth-child(2) div:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4.34px;
+  height: 4.34px;
+  top: -4.34px;
+  left: 43.4px;
+  background: #f0cc71;
+  border-radius: 50%;
+  box-shadow: 0 95px 0 0 #f0cc71;
+}
+.coe-spinner > div:nth-child(2) div:after { 
+  left: -4.34px;
+  top: 43.4px;
+  box-shadow: 95px 0 0 0 #f0cc71;
+}
+.loading-coe-spinner {
+  width: 217px;
+  height: 217px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+}
+.coe-spinner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; 
+}
+.coe-spinner div { box-sizing: content-box; }
+
+.title {
+  width: 36px;    
+  min-height: 4px;    
+  max-height: 4px;    
+  background-color:white; 
+  margin-bottom:10px
+}
+
+.titleHeader{
+  font-family:Oracle Sans; 
+  font-weight:normal; 
+  color:white; 
+  font-size:18px; 
+  margin-bottom:5px
+}
+
+.h1header{
+  color:white;
+   margin-top:75px; 
+   font-family:Georgia; 
+   font-weight:normal;
+}
+
+.textcolor{
+    color: white;
+}
+
+.highlighter{
+  font-size:15px; 
+  color:white; 
+  font-weight:bold;
+}
+
+#crosscxtag {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #B3311F;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 14px;
+  color: #ffF;
+  opacity: 0.75;
+}

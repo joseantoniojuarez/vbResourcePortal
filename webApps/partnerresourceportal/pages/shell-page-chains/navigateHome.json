@@ -1,0 +1,43 @@
+{
+  "root": "if",
+  "description": "action chain used for home page landing based on role",
+  "variables": {},
+  "actions": {
+    "return": {
+      "module": "vb/action/builtin/returnAction",
+      "parameters": {
+        "outcome": "success",
+        "payload": "{{ {cancelled: false} }}"
+      },
+      "description": "Navigation to this page can be canceled by returning an object with the property cancelled set to true. This is useful if the user does not have permission to view this page."
+    },
+    "if": {
+      "module": "vb/action/builtin/ifAction",
+      "parameters": {
+        "condition": "[[ $application.user.roles[0] == \"Contractors\" ]]"
+      },
+      "outcomes": {
+        "true": "navigateToContractor",
+        "false": "navigateToAdmin"
+      }
+    },
+    "navigateToContractor": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "/shell/contractor"
+      },
+      "outcomes": {
+        "success": "return"
+      }
+    },
+    "navigateToAdmin": {
+      "module": "vb/action/builtin/navigateAction",
+      "parameters": {
+        "page": "/shell/admin"
+      },
+      "outcomes": {
+        "success": "return"
+      }
+    }
+  }
+}

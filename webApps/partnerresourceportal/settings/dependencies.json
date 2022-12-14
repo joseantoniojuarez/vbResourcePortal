@@ -1,0 +1,13 @@
+{
+  "component-dependencies": {
+    "oj-sp": {
+      "version": "2207.0.0",
+      "components": {
+        "pillar-theme": "2207.0.0",
+        "mini-card": "2207.0.0",
+        "image-card": "2207.0.0",
+        "object-card": "2207.0.0"
+      }
+    }
+  }
+}

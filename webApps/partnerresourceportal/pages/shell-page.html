@@ -1,0 +1,25 @@
+<oj-sp-pillar-theme id="theme" mode="mixed" theme="pebble">
+  <div class="oj-text-color-danger oj-helper-text-align-center" style="font-size:1rem">This application is an unsupported sample for demonstration purposes only.</div>
+<div id="crosscxtag"> Cross CX Team</div>
+  <!-- Displays notification messages -->
+  <oj-messages id="vbDefaultNotifier" display-options.category="none" position="{}" display="general" messages="{{$page.variables.messagesADP}}" on-oj-close="[[$listeners.onMessageClose]]"></oj-messages>
+
+  <div class="vb-content-and-footer-container oj-flex oj-sm-flex-direction-column oj-sm-flex-1 oj-sm-flex-wrap-nowrap">
+
+  <oj-bind-if test="[[ $application.variables.displayLoading ]]">
+
+  <img :src="[[ $application.path + 'resources/images/spinner_full.gif' ]]" style="object-fit: scale-down;"
+    class="loading-coe-spinner">
+
+  
+
+</oj-bind-if>
+    
+    <oj-vb-content id="vbRouterContent" class="vb-pages-module oj-flex-item oj-flex" config="[[vbRouterFlow]]">
+
+    </oj-vb-content>
+
+  </div>
+  
+  
+</oj-sp-pillar-theme>
